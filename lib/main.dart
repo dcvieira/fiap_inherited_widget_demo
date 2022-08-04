@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inherited_widget_demo/event_card.dart';
+import 'package:inherited_widget_demo/event_provider.dart';
 import 'package:inherited_widget_demo/model/event.dart';
 
 void main() {
@@ -23,18 +24,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(event: event),
+      home: EventProvider(
+        child: MyHomePage(),
+        event: event,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({required this.event});
-
-  final Event event;
-
   @override
   Widget build(BuildContext context) {
+    final event = EventProvider.of(context)!.event;
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -48,7 +50,7 @@ class MyHomePage extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              EventCard(event: event),
+              EventCard(),
             ],
           ),
         ),

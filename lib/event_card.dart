@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:inherited_widget_demo/model/event.dart';
-import 'package:inherited_widget_demo/model/stars_average.dart';
+import 'package:inherited_widget_demo/event_provider.dart';
+import 'package:inherited_widget_demo/stars_average.dart';
 
 class EventCard extends StatelessWidget {
-  final Event event;
-  const EventCard({required this.event});
-
   @override
   Widget build(BuildContext context) {
+    final event = EventProvider.of(context)!.event;
     return Card(
       elevation: 8,
       child: Container(
@@ -27,7 +25,7 @@ class EventCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            StarAverage(rate: event.rate),
+            StarAverage(),
             const SizedBox(
               height: 10,
             ),
